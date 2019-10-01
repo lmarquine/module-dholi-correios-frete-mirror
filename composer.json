@@ -1,0 +1,42 @@
+{
+  "name": "dholi/module-dholi-correios-frete",
+  "type": "magento2-component",
+  "description": "Frete com Correios para Magento 2",
+  "version": "dev-master",
+  "homepage": "https://www.dholi.dev/projetos/correios-frete",
+  "keywords": [
+    "magento",
+    "magento2",
+    "shipping",
+    "correios",
+    "ecommerce"
+  ],
+  "authors": [
+    {
+      "name": "dholi.dev",
+      "email": "comunidade@dholi.dev"
+    }
+  ],
+  "require": {
+    "php": "~7.2",
+    "magento/framework": ">=102.0.2",
+    "dholi/module-dholi-platform": "dev-master"
+  },
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "autoload": {
+    "files": [
+      "src/module-dholi-correios-frete/registration.php"
+    ],
+    "psr-4": {
+      "Dholi\\CorreiosFrete\\": "src/module-dholi-correios-frete"
+    }
+  },
+  "scripts": {
+  },
+  "replace": {
+
+  }
+}

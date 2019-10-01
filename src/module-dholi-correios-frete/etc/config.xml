@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<carriers>
+			<dholi_correios_frete>
+				<active>0</active>
+				<title>Correios</title>
+				<shipping_cost>10</shipping_cost>
+				<sallowspecific>0</sallowspecific>
+				<sort_order>15</sort_order>
+				<model>Dholi\CorreiosFrete\Model\Carrier\Correios</model>
+			</dholi_correios_frete>
+		</carriers>
+	</default>
+</config>
