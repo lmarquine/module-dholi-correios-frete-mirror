@@ -506,6 +506,4 @@ class Carrier extends AbstractCarrier implements CarrierInterface {
 
 		return $detail;
 	}
-
-
 }
