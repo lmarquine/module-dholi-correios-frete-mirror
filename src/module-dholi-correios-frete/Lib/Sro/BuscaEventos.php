@@ -45,6 +45,4 @@ class BuscaEventos {
 		$this->lingua = $lingua;
 		$this->objetos = $objetos;
 	}
-
-
 }

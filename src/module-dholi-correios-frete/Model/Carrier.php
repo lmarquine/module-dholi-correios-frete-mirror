@@ -437,10 +437,10 @@ class Carrier extends AbstractCarrier implements CarrierInterface {
 	}
 
 	public function getTrackingInfo($tracking) {
-		return $this->_getTracking($tracking);
+		return $this->searchCorreiosQuotes($tracking);
 	}
 
-	private function _getTracking($trackingNumber) {
+	private function searchCorreiosQuotes($trackingNumber) {
 		$user = $this->getConfigData('sro_user');
 		$pwd = $this->getConfigData('sro_password');
 		if (empty($user) || empty($pwd)) {
@@ -477,7 +477,7 @@ class Carrier extends AbstractCarrier implements CarrierInterface {
 				'deliverytime' => date('H:i', strtotime($lastEvent->hora)),
 				'deliverylocation' => $lastEvent->cidade . '&nbsp;/&nbsp;' . $lastEvent->uf,
 				'status' => htmlentities($lastEvent->descricao),
-				'progressdetail' => $this->_eventsAsString($objeto),
+				'progressdetail' => $this->eventsAsString($objeto),
 			);
 
 			$tracking = $this->trackStatusFactory->create();
@@ -490,7 +490,7 @@ class Carrier extends AbstractCarrier implements CarrierInterface {
 		}
 	}
 
-	private function _eventsAsString($objeto) {
+	private function eventsAsString($objeto) {
 		$detail = array();
 		foreach ($objeto->evento as $event) {
 			$dataEntrega = str_replace('/', '-', $event->data);
