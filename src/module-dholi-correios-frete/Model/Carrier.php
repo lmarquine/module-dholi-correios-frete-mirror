@@ -191,7 +191,7 @@ class Carrier extends AbstractCarrier implements CarrierInterface {
 		if ($this->check($request) === false) {
 			return $this->_result;
 		}
-		$this->_result = $this->getQuotes();
+		$this->getQuotes();
 
 		return $this->_result;
 	}
