@@ -30,7 +30,7 @@ class Servicos implements \Magento\Framework\Option\ArrayInterface {
 	public function toOptionArray() {
 		$options = [];
 		foreach ($this->carrier->getCode('service') as $k => $v) {
-			$options[] = array('value' => $k, 'label' => $v);
+			$options[] = ['value' => $k, 'label' => $v];
 		}
 
 		return $options;
