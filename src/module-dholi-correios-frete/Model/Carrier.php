@@ -437,10 +437,10 @@ class Carrier extends AbstractCarrier implements CarrierInterface {
 	}
 
 	public function getTrackingInfo($tracking) {
-		return $this->searchCorreiosQuotes($tracking);
+		return $this->searchCorreiosEvents($tracking);
 	}
 
-	private function searchCorreiosQuotes($trackingNumber) {
+	private function searchCorreiosEvents($trackingNumber) {
 		$user = $this->getConfigData('sro_user');
 		$pwd = $this->getConfigData('sro_password');
 		if (empty($user) || empty($pwd)) {
