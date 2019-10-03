@@ -17,6 +17,8 @@ namespace Dholi\CorreiosFrete\Model;
 use Dholi\CorreiosFrete\Lib\CalcPrecoPrazo\CalcPrecoPrazo;
 use Dholi\CorreiosFrete\Lib\CalcPrecoPrazo\CalcPrecoPrazoWS;
 use Dholi\CorreiosFrete\Lib\CalcPrecoPrazo\Errors;
+use Dholi\CorreiosFrete\Lib\Sro\BuscaEventos;
+use Dholi\CorreiosFrete\Lib\Sro\Rastro;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory;
@@ -24,7 +26,9 @@ use Magento\Quote\Model\Quote\Address\RateResult\MethodFactory;
 use Magento\Sales\Model\Order\Shipment;
 use Magento\Shipping\Model\Carrier\AbstractCarrier;
 use Magento\Shipping\Model\Carrier\CarrierInterface;
+use Magento\Shipping\Model\Rate\Result;
 use Magento\Shipping\Model\Rate\ResultFactory;
+use Magento\Shipping\Model\Tracking\Result\StatusFactory;
 use Psr\Log\LoggerInterface;
 
 class Carrier extends AbstractCarrier implements CarrierInterface {
@@ -49,6 +53,12 @@ class Carrier extends AbstractCarrier implements CarrierInterface {
 	private $rateResultFactory;
 
 	private $rateMethodFactory;
+
+	private $trackFactory;
+
+	private $trackErrorFactory;
+
+	private $trackStatusFactory;
 
 	private $packageValue;
 
@@ -75,13 +85,18 @@ class Carrier extends AbstractCarrier implements CarrierInterface {
 	                            LoggerInterface $logger,
 	                            ResultFactory $rateResultFactory,
 	                            MethodFactory $rateMethodFactory,
-	                            array $data = []
-	) {
+	                            array $data = [],
+	                            \Magento\Shipping\Model\Tracking\ResultFactory $trackFactory,
+	                            \Magento\Shipping\Model\Tracking\Result\ErrorFactory $trackErrorFactory,
+	                            \Magento\Shipping\Model\Tracking\Result\StatusFactory $trackStatusFactory) {
 		parent::__construct($scopeConfig, $rateErrorFactory, $logger, $data);
 
 		$this->rateErrorFactory = $rateErrorFactory;
 		$this->rateResultFactory = $rateResultFactory;
 		$this->rateMethodFactory = $rateMethodFactory;
+		$this->trackFactory = $trackFactory;
+		$this->trackErrorFactory = $trackErrorFactory;
+		$this->trackStatusFactory = $trackStatusFactory;
 		$this->logger = $logger;
 	}
 
@@ -413,4 +428,84 @@ class Carrier extends AbstractCarrier implements CarrierInterface {
 
 		return $code;
 	}
+
+	public function isTrackingAvailable() {
+		$user = $this->getConfigData('sro_user');
+		$pwd = $this->getConfigData('sro_password');
+
+		return (null != $user && null != $pwd);
+	}
+
+	public function getTrackingInfo($tracking) {
+		return $this->_getTracking($tracking);
+	}
+
+	private function _getTracking($trackingNumber) {
+		$user = $this->getConfigData('sro_user');
+		$pwd = $this->getConfigData('sro_password');
+		if (empty($user) || empty($pwd)) {
+			$error = $this->trackErrorFactory->create();
+			$error->setTracking($trackingNumber);
+			$error->setCarrier($this->_code);
+			$error->setCarrierTitle($this->getConfigData('title'));
+			$error->setErrorMessage('É necessário informar o Usuário e senha do Sistema de Rastreamento de Objetos.');
+
+			return $error;
+		}
+
+		$buscaEventos = new BuscaEventos($user, $pwd, 'L', 'L', '101', $trackingNumber);
+		$rastroWs = new Rastro();
+		$buscaEventosResponse = $rastroWs->buscaEventos($buscaEventos);
+
+		$objeto = $buscaEventosResponse->return->objeto;
+		$rate = null;
+
+		if ($objeto == null || $objeto == '' || isset($objeto->erro)) {
+			$error = $this->trackErrorFactory->create();
+			$error->setTracking($trackingNumber);
+			$error->setCarrier($this->_code);
+			$error->setCarrierTitle($this->getConfigData('title'));
+			$error->setErrorMessage($objeto->erro);
+
+			return $error;
+		} else {
+			$lastEvent = $objeto->evento[0];
+			$dataEntrega = str_replace('/', '-', $lastEvent->data);
+
+			$track = array(
+				'deliverydate' => date('d-m-Y', strtotime($dataEntrega)),
+				'deliverytime' => date('H:i', strtotime($lastEvent->hora)),
+				'deliverylocation' => $lastEvent->cidade . '&nbsp;/&nbsp;' . $lastEvent->uf,
+				'status' => htmlentities($lastEvent->descricao),
+				'progressdetail' => $this->_eventsAsString($objeto),
+			);
+
+			$tracking = $this->trackStatusFactory->create();
+			$tracking->setTracking($trackingNumber);
+			$tracking->setCarrier($this->_code);
+			$tracking->setCarrierTitle($this->getConfigData('title'));
+			$tracking->addData($track);
+
+			return $tracking;
+		}
+	}
+
+	private function _eventsAsString($objeto) {
+		$detail = array();
+		foreach ($objeto->evento as $event) {
+			$dataEntrega = str_replace('/', '-', $event->data);
+			$destino = (isset($event->destino) ? $event->destino : null);
+
+			$detail[] = array(
+				'deliverydate' => date('d-m-Y', strtotime($dataEntrega)),
+				'deliverytime' => $event->hora,
+				'deliverylocation' => $event->cidade . '&nbsp;/&nbsp;' . $event->uf,
+				'activity' => $event->descricao . (!is_null($destino) ? sprintf(' (Unidade Operacional em %s / %s)', $destino->cidade, $destino->uf) : ''),
+			);
+		}
+
+		return $detail;
+	}
+
+
 }

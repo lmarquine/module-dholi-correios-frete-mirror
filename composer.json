@@ -19,8 +19,7 @@
   ],
   "require": {
     "php": "~7.2",
-    "magento/framework": ">=102.0.2",
-    "dholi/module-dholi-platform": "dev-master"
+    "magento/framework": ">=102.0.2"
   },
   "license": [
     "OSL-3.0",
@@ -33,10 +32,5 @@
     "psr-4": {
       "Dholi\\CorreiosFrete\\": "src/module-dholi-correios-frete"
     }
-  },
-  "scripts": {
-  },
-  "replace": {
-
   }
 }
