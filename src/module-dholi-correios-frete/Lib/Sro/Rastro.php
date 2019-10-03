@@ -21,15 +21,15 @@ class Rastro extends \SoapClient {
 	 * @access private
 	 */
 	private static $classmap = array(
-		'BuscaEventosLista' => '\Dholi\CorreiosFrete\Lib\Sro\BuscaEventosLista',
-		'BuscaEventosListaResponse' => '\Dholi\CorreiosFrete\Lib\Sro\BuscaEventosListaResponse',
-		'Sroxml' => '\Dholi\CorreiosFrete\Lib\Sro\Sroxml',
-		'Objeto' => '\Dholi\CorreiosFrete\Lib\Sro\Objeto',
-		'Eventos' => '\Dholi\CorreiosFrete\Lib\Sro\Eventos',
-		'Destinos' => '\Dholi\CorreiosFrete\Lib\Sro\Destinos',
-		'EnderecoMobile' => '\Dholi\CorreiosFrete\Lib\Sro\EnderecoMobile',
-		'BuscaEventos' => '\Dholi\CorreiosFrete\Lib\Sro\BuscaEventos',
-		'BuscaEventosResponse' => '\Dholi\CorreiosFrete\Lib\Sro\BuscaEventosResponse');
+		'buscaEventosLista' => '\Dholi\CorreiosFrete\Lib\Sro\BuscaEventosLista',
+		'buscaEventosListaResponse' => '\Dholi\CorreiosFrete\Lib\Sro\BuscaEventosListaResponse',
+		'sroxml' => '\Dholi\CorreiosFrete\Lib\Sro\Sroxml',
+		'objeto' => '\Dholi\CorreiosFrete\Lib\Sro\Objeto',
+		'eventos' => '\Dholi\CorreiosFrete\Lib\Sro\Eventos',
+		'destinos' => '\Dholi\CorreiosFrete\Lib\Sro\Destinos',
+		'enderecoMobile' => '\Dholi\CorreiosFrete\Lib\Sro\EnderecoMobile',
+		'buscaEventos' => '\Dholi\CorreiosFrete\Lib\Sro\BuscaEventos',
+		'buscaEventosResponse' => '\Dholi\CorreiosFrete\Lib\Sro\BuscaEventosResponse');
 
 	/**
 	 * @param array $options A array of config values
