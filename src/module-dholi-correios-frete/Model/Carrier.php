@@ -165,9 +165,9 @@ class Carrier extends AbstractCarrier implements CarrierInterface {
 				}
 			}
 		}
-		$this->nVlAltura = $this->getConfigData('altura_padrao');
-		$this->nVlLargura = $this->getConfigData('largura_padrao');
-		$this->nVlComprimento = $this->getConfigData('comprimento_padrao');
+		$this->nVlAltura = $this->getConfigData('default_height');
+		$this->nVlLargura = $this->getConfigData('default_width');
+		$this->nVlComprimento = $this->getConfigData('default_length');
 
 		$this->hasFreeMethod = $request->getFreeShipping();
 		$this->_freeMethod = $this->getConfigData('servico_gratuito');

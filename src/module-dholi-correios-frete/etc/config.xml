@@ -15,9 +15,9 @@
 				<vl_valor_declarado>0</vl_valor_declarado>
 				<cd_mao_propria>0</cd_mao_propria>
 				<cd_aviso_recebimento>0</cd_aviso_recebimento>
-				<altura_padrao>2</altura_padrao>
-				<comprimento_padrao>16</comprimento_padrao>
-				<largura_padrao>11</largura_padrao>
+				<default_height>2</default_height>
+				<default_length>16</default_length>
+				<default_width>11</default_width>
 				<prazo_entrega>1</prazo_entrega>
 				<taxa_extra>0</taxa_extra>
 				<taxa_extra_valor>0</taxa_extra_valor>

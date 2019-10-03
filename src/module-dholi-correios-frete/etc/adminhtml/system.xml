@@ -67,15 +67,15 @@
 					<label>Medidas</label>
 					<frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
 				</field>
-				<field id="altura_padrao" translate="label" type="text" sortOrder="41" showInDefault="1" showInWebsite="1" showInStore="0">
+				<field id="default_height" translate="label" type="text" sortOrder="41" showInDefault="1" showInWebsite="1" showInStore="0">
 					<label><![CDATA[Altura padrão (cm)]]></label>
 					<validate>required-entry validate-digits</validate>
 				</field>
-				<field id="largura_padrao" translate="label" type="text" sortOrder="42" showInDefault="1" showInWebsite="1" showInStore="0">
+				<field id="default_width" translate="label" type="text" sortOrder="42" showInDefault="1" showInWebsite="1" showInStore="0">
 					<label><![CDATA[Largura padrão (cm)]]></label>
 					<validate>required-entry validate-digits</validate>
 				</field>
-				<field id="comprimento_padrao" translate="label" type="text" sortOrder="43" showInDefault="1" showInWebsite="1" showInStore="0">
+				<field id="default_length" translate="label" type="text" sortOrder="43" showInDefault="1" showInWebsite="1" showInStore="0">
 					<label><![CDATA[Comprimento padrão (cm)]]></label>
 					<validate>required-entry validate-digits</validate>
 				</field>
