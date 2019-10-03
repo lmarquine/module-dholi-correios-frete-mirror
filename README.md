@@ -1,1 +1,1 @@
-# Integração Frente com Correios para Magento 2 Open Source
+# Cálculo de Frete com Correios para Magento 2 Open Source
