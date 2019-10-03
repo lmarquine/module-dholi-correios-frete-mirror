@@ -23,5 +23,4 @@ class FormatoEmbalagem implements \Magento\Framework\Option\ArrayInterface {
 			['value' => '3', 'label' => __('Envelope')]
 		];
 	}
-
 }

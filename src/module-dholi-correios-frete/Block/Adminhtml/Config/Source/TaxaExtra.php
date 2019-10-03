@@ -23,5 +23,4 @@ class TaxaExtra implements \Magento\Framework\Option\ArrayInterface {
 			['value' => '2', 'label' => __('Em valor')]
 		];
 	}
-
 }
