@@ -21,6 +21,7 @@ use Magento\Framework\Setup\ModuleContextInterface;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 
 class InstallData implements InstallDataInterface {
+
 	private $eavSetupFactory;
 
 	public function __construct(EavSetupFactory $eavSetupFactory) {

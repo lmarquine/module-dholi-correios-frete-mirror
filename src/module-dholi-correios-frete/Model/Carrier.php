@@ -173,8 +173,8 @@ class Carrier extends AbstractCarrier implements CarrierInterface {
 		$this->_freeMethod = $this->getConfigData('servico_gratuito');
 
 		$this->packageValue = $request->getBaseCurrency()->convert($price, $request->getPackageCurrency());
-		$this->packageWeight = number_format($weight, 2, '.', '');
-		$this->freeMethodWeight = number_format($request->getFreeMethodWeight(), 2, '.', '');
+		$this->packageWeight = number_format(floatval($weight), 2, '.', '');
+		$this->freeMethodWeight = number_format(floatval($request->getFreeMethodWeight()), 2, '.', '');
 	}
 
 	public function collectRates(RateRequest $request) {
