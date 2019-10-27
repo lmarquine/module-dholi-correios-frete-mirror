@@ -2,7 +2,7 @@
   "name": "dholi/module-dholi-correios-frete",
   "type": "magento2-component",
   "description": "Frete com Correios para Magento 2",
-  "version": "dev-master",
+  "version": "1.0.0",
   "homepage": "https://www.dholi.dev/projetos/correios-frete",
   "keywords": [
     "magento",
