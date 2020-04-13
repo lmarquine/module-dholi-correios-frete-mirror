@@ -5,8 +5,8 @@
 * 
 * @category     Dholi
 * @package      Modulo Frente com Correios
-* @copyright    Copyright (c) 2019 dholi (https://www.dholi.dev)
-* @version      1.0.0
+* @copyright    Copyright (c) 2020 dholi (https://www.dholi.dev)
+* @version      1.0.1
 * @license      https://www.dholi.dev/license/
 *
 */
@@ -16,7 +16,7 @@ namespace Dholi\CorreiosFrete\Lib\CalcPrecoPrazo;
 
 class CalcPrecoPrazoWS extends \SoapClient {
 
-	const TIMEOUT = '10';
+	const TIMEOUT = '30';
 
 	private static $classmap = array(
 		'CalcPrecoPrazo' => '\Dholi\CorreiosFrete\Lib\CalcPrecoPrazo\CalcPrecoPrazo',

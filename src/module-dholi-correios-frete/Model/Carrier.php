@@ -5,8 +5,8 @@
 * 
 * @category     Dholi
 * @package      Modulo Frente com Correios
-* @copyright    Copyright (c) 2019 dholi (https://www.dholi.dev)
-* @version      1.0.0
+* @copyright    Copyright (c) 2020 dholi (https://www.dholi.dev)
+* @version      1.0.1
 * @license      https://www.dholi.dev/license/
 *
 */
@@ -117,7 +117,6 @@ class Carrier extends AbstractCarrier implements CarrierInterface {
 
 			return false;
 		}
-
 		$this->fromZip = $this->_scopeConfig->getValue(Shipment::XML_PATH_STORE_ZIP, \Magento\Store\Model\ScopeInterface::SCOPE_STORE, $request->getStoreId());
 		$this->fromZip = str_replace(array('-', '.'), '', trim($this->fromZip));
 
@@ -328,6 +327,7 @@ class Carrier extends AbstractCarrier implements CarrierInterface {
 			} else {
 				$rate->setPrice(floatval(str_replace(',', '.', (string)$servico->Valor)));
 			}
+
 			if ($this->hasFreeMethod) {
 				if ($method == $this->_freeMethod) {
 					$v1 = floatval(str_replace(',', '.', (string)$this->getConfigData('servico_gratuito_desconto')));
@@ -336,6 +336,7 @@ class Carrier extends AbstractCarrier implements CarrierInterface {
 						$rate->setPrice(0);
 					}
 				}
+
 				if ($method == $this->freeMethodSameCEP) {
 					$rate->setPrice(0);
 				}
@@ -404,6 +405,7 @@ class Carrier extends AbstractCarrier implements CarrierInterface {
 			} else {
 				$calcPrecoPrazo->nCdServico = $this->getConfigData('cd_servico');
 				$calculaFreteResponse = $calcPrecoPrazoWS->CalcPrecoPrazo($calcPrecoPrazo);
+
 				$this->addCorreiosService($calculaFreteResponse->CalcPrecoPrazoResult->Servicos);
 			}
 		} catch (SoapFault $sf) {

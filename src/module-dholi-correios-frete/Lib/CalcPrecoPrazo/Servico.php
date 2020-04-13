@@ -5,8 +5,8 @@
 * 
 * @category     Dholi
 * @package      Modulo Frente com Correios
-* @copyright    Copyright (c) 2019 dholi (https://www.dholi.dev)
-* @version      1.0.0
+* @copyright    Copyright (c) 2020 dholi (https://www.dholi.dev)
+* @version      1.0.1
 * @license      https://www.dholi.dev/license/
 *
 */

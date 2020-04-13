@@ -61,6 +61,7 @@
 				</field>
 				<field id="servico_gratuito_desconto" translate="label" type="text" sortOrder="33" showInDefault="1" showInWebsite="1" showInStore="1">
 					<label><![CDATA[Valor máximo p/ frete grátis]]></label>
+					<validate>required-entry validate-currency-dollar</validate>
 				</field>
 
 				<field id="dimensoes" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
